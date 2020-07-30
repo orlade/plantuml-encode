@@ -38,3 +38,14 @@ jobs:
           args: release --rm-dist --debug -f .github/goreleaser_configs/.goreleaser.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+          repository: docker.io/orlade/plantuml-encode
+          tag_with_ref: true
+          add_git_labels: true
+          tags: latest
+          labels: org.opencontainers.image.revision=${{ github.sha }},org.opencontainers.image.url=https://github.com/orlade/plantuml-encode
