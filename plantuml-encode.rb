@@ -2,16 +2,16 @@
 class PlantumlEncode < Formula
   desc "Encodes PlantUML source to send to the server."
   homepage ""
-  version "0.1.0"
+  version "0.4.0"
   bottle :unneeded
 
   if OS.mac?
-    url "https://github.com/orlade/plantuml-encode/releases/download/v0.1.0/plantuml-encode_0.1.0_darwin-amd64.tar.gz"
-    sha256 "ba0e7ceb481516ce062de889f332725653ac69aa59cba2bcd4fc36c52fe09f11"
+    url "https://github.com/orlade/plantuml-encode/releases/download/v0.4.0/plantuml-encode_0.4.0_darwin-amd64.tar.gz"
+    sha256 "2d8fcddc1c8f627cc8f9d71bcf4dee83238ea88a59160eb0f4569c93a11c5cca"
   elsif OS.linux?
     if Hardware::CPU.intel?
-      url "https://github.com/orlade/plantuml-encode/releases/download/v0.1.0/plantuml-encode_0.1.0_linux-amd64.tar.gz"
-      sha256 "b43b7bbb489a3823dddaf426c7da8119c46afee2a21421486aea2445e4762761"
+      url "https://github.com/orlade/plantuml-encode/releases/download/v0.4.0/plantuml-encode_0.4.0_linux-amd64.tar.gz"
+      sha256 "c1720add31d933c57dc19730202664d72af85a4f0c09fd12571dd6f84c7c69e9"
     end
   end
 
