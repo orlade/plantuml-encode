@@ -7,8 +7,6 @@ before:
     - go mod tidy
 
 build:
-  binary: plantuml-encode
-  main: plantuml-encode
   ldflags:
     - -s -w -X main.Version=v{{.Version}}
     - -X main.GitCommit={{.ShortCommit}}
