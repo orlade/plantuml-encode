@@ -1,4 +1,4 @@
-name: Generate-Tag
+name: Generate Tag
 
 on:
   push:

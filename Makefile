@@ -1,5 +1,7 @@
+.PHONY: all tidy lint build test releasebuild docker docker.run
+
 VERSION=`cat VERSION`
-GO_VERSION=$(strip $(subst go version, , $(shell go version)))
+GO_VERSION=$(shell go version | cut -d' ' -f3)
 
 LDFLAGS='-X "main.Version=$(VERSION)" -X "main.GoVersion=$(GO_VERSION)"'
 
@@ -11,23 +13,21 @@ tidy:
 	goimports -w .
 	gofmt -w .
 
-.PHONY: lint
 lint:
 	golangci-lint run ./...
 
-.PHONY: build
 build: main.go
 	go build -v -o ./dist/plantuml-encode -ldflags=$(LDFLAGS) main.go
 
-.PHONY: test
 test: main.go main_test.go
-	go test ./...
+	go test -v -race ./...
 
-.PHONY: docker
+releasebuild: main.go
+	GOVERSION=$(GOVERSION) goreleaser build --rm-dist --snapshot
+
 docker: main.go
 	docker build -t orlade/plantuml-encode .
 
 # Pipe input to this target to encode it.
-.PHONY: docker.run
 docker.run:
 	docker run -i --rm orlade/plantuml-encode
