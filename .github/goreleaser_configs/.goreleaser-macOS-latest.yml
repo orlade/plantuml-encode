@@ -8,6 +8,7 @@ before:
 
 build:
   binary: plantuml-encode
+  main: plantuml-encode
   ldflags:
     - -s -w -X main.Version={{.Version}}
     - -X main.GitCommit={{.ShortCommit}}
