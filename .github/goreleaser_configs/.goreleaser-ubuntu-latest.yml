@@ -8,8 +8,6 @@ before:
 
 build:
   binary: plantuml-encode
-  id: plantuml-encode
-  main: ./main
   ldflags:
     - -s -w -X main.Version={{.Version}}
     - -X main.GitCommit={{.ShortCommit}}
@@ -24,16 +22,16 @@ build:
     - 7
 
 archives:
-- id: "plantuml-encode"
-  builds: ['plantuml-encode']
-  format: tar.gz
-  replacements:
-    linux: linux
-  name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
-  files:
-    - README.md
-    - LICENSE
+  - id: "plantuml-encode"
+    builds: ["plantuml-encode"]
+    format: tar.gz
+    replacements:
+      linux: linux
+    name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+    files:
+      - README.md
+      - LICENSE
 
 snapshot:
 checksum:
-  name_template: '{{.ProjectName}}_{{.Version}}_checksums.txt'
+  name_template: "{{.ProjectName}}_{{.Version}}_checksums.txt"
