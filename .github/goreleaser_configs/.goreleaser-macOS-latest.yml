@@ -1,0 +1,39 @@
+project_name: plantuml-encode
+env:
+  - GO111MODULE=on
+  - GOPROXY=https://proxy.golang.org
+before:
+  hooks:
+    - go mod tidy
+
+build:
+  binary: plantuml-encode
+  id: plantuml-encode
+  main: ./main
+  ldflags:
+    - -s -w -X main.Version={{.Version}}
+    - -X main.GitCommit={{.ShortCommit}}
+    - -X main.BuildDate={{.Date}}
+    - -X main.BuildOS={{.Os}}/{{.Arch}}
+    - -s -w -X "main.GoVersion={{.Env.GOVERSION}}"
+  goos:
+    - darwin
+  goarch:
+    - amd64
+  goarm:
+    - 7
+
+archives:
+- id: "plantuml-encode"
+  builds: ['plantuml-encode']
+  format: tar.gz
+  replacements:
+    darwin: darwin
+  name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+  files:
+    - README.md
+    - LICENSE
+
+snapshot:
+checksum:
+  name_template: '{{.ProjectName}}_{{.Version}}_checksums.txt'

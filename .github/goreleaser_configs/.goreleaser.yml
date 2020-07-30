@@ -1,0 +1,85 @@
+project_name: plantuml-encode
+env:
+  - GO111MODULE=on
+  - GOPROXY=https://proxy.golang.org
+before:
+  hooks:
+    - go mod tidy
+
+build:
+  binary: plantuml-encode
+  id: plantuml-encode
+  main: ./main
+  ldflags:
+    - -s -w -X main.Version=v{{.Version}}
+    - -X main.GitCommit={{.ShortCommit}}
+    - -X main.GitFullCommit={{.FullCommit}}
+    - -X main.BuildDate={{.Date}}
+    - -X main.BuildOS={{.Os}}/{{.Arch}}
+    - -s -w -X "main.GoVersion={{.Env.GOVERSION}}"
+  goos:
+    - darwin
+    - linux
+    - windows
+  goarch:
+    - amd64
+    - 386
+  goarm:
+    - 7
+
+archives:
+- id: "plantuml-encode"
+  builds: ['plantuml-encode']
+  format: tar.gz
+  format_overrides:
+    - goos: windows
+      format: zip
+  replacements:
+    darwin: darwin
+    linux: linux
+    windows: windows
+    openbsd: openBSD
+    netbsd: netBSD
+    freebsd: freeBSD
+    dragonfly: dragonFlyBSD
+  name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+  files:
+    - README.md
+    - LICENSE
+
+checksum:
+  name_template: '{{.ProjectName}}_{{.Version}}_checksums.txt'
+snapshot:
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - typo
+
+brews:
+  -
+    name: plantuml-encode
+    description: "Encodes PlantUML source to send to the server."
+
+    # NOTE: make sure the url_template, the token and given repo (github or gitlab) owner and name are from the
+    # same kind. We will probably unify this in the next major version like it is done with scoop.
+
+    # Github repository to push the tap to.
+    github:
+      owner: orlade
+      name: plantuml-encode
+
+    url_template: "https://github.com/orlade/plantuml-encode/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+
+    # So you can `brew test` your formula.
+    # Default is empty.
+    test: |
+      system "#{bin}/plantuml-encode --version"
+
+    # Custom install script for brew.
+    # Default is 'bin.install "program"'.
+    install: |
+      bin.install "plantuml-encode"
