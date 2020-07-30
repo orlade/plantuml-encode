@@ -67,8 +67,8 @@ brews:
     # NOTE: make sure the url_template, the token and given repo (github or gitlab) owner and name are from the
     # same kind. We will probably unify this in the next major version like it is done with scoop.
 
-    # Github repository to push the tap to.
-    github:
+    # GitHub repository to push the tap to.
+    tap:
       owner: orlade
       name: plantuml-encode
 
