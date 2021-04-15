@@ -31,10 +31,10 @@ jobs:
       - name: Set GOVERSION environment variable
         run: echo ::set-env name=GOVERSION::$(go version | awk '{print $3, $4;}')
 
-      - name: Build binary via goreleaser
+      - name: Test goreleaser build
         uses: goreleaser/goreleaser-action@master
         with:
-          args: release --snapshot --skip-publish --rm-dist --debug -f .github/goreleaser_configs/.goreleaser-${{ matrix.os }}.yml
+          args: release --snapshot --skip-publish --rm-dist --debug -f .goreleaser.yml
 
   build-docker:
     name: Builds the Docker image
