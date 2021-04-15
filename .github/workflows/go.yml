@@ -25,9 +25,6 @@ jobs:
       - name: Unshallow
         run: git fetch --prune --unshallow
 
-      - name: Test
-        run: make coverage
-
       - name: Set GOVERSION environment variable
         run: echo ::set-env name=GOVERSION::$(go version | awk '{print $3, $4;}')
 
