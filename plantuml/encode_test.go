@@ -1,4 +1,4 @@
-package main
+package plantuml
 
 import (
 	"testing"
@@ -13,7 +13,7 @@ Bob -> Alice : hello
 
 	expected := "UDfoA2v9B2efpStXSifFKj2rKt3CoKnELR1Io4ZDoSddSaZDIodDpG44003___W93C00"
 
-	encoded, err := deflateAndEncode([]byte(source))
+	encoded, err := DeflateAndEncode(source)
 
 	assert.NoError(t, err)
 	assert.Equal(t, expected, encoded)
