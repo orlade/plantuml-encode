@@ -1,5 +1,6 @@
 project_name: plantuml-encode
 env:
+  - CGO_ENABLED=0
   - GO111MODULE=on
   - GOPROXY=https://proxy.golang.org
 before:
