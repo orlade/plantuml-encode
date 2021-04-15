@@ -17,15 +17,15 @@ lint:
 	golangci-lint run ./...
 
 build: main.go
-	go build -v -o ./dist/plantuml-encode -ldflags=$(LDFLAGS) main.go
+	go build -v -o ./dist/plantuml-encode -ldflags=$(LDFLAGS) $<
 
-test: main.go main_test.go
+test:
 	go test -v -race ./...
 
 releasebuild: main.go
 	GOVERSION=$(GOVERSION) goreleaser build --rm-dist --snapshot
 
-docker: main.go
+docker:
 	docker build -t orlade/plantuml-encode .
 
 # Pipe input to this target to encode it.
