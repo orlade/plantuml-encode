@@ -5,15 +5,15 @@ import (
 	"io/ioutil"
 	"os"
 
+	"golang.org/x/term"
+
 	"github.com/orlade/plantuml-encode/plantuml"
 
 	"github.com/sirupsen/logrus"
-
-	"golang.org/x/crypto/ssh/terminal"
 )
 
 func main() {
-	if terminal.IsTerminal(0) {
+	if term.IsTerminal(0) {
 		logrus.Error("no piped data")
 		os.Exit(1)
 	}

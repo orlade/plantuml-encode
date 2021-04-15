@@ -15,12 +15,6 @@ jobs:
         with:
           fetch-depth: "0"
 
-      - name: Test release build
-        uses: goreleaser/goreleaser-action@v1.3.1
-        with:
-          version: v0.140.0
-          args: --snapshot --skip-publish --rm-dist --debug -f .goreleaser.yml
-
       # Generate tag if commit message contains #major or #patch or #patch
       - name: Bump version and push tag
         id: generate_tag
