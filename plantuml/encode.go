@@ -2,7 +2,7 @@ package plantuml
 
 import (
 	"bytes"
-	"compress/zlib"
+	"compress/flate"
 	"io"
 )
 
@@ -18,7 +18,7 @@ func DeflateAndEncode(text string) (string, error) {
 // PlantUML server.
 func DeflateAndEncodeBytes(text []byte) (string, error) {
 	var buf bytes.Buffer
-	zw, err := zlib.NewWriterLevel(&buf, zlib.BestCompression)
+	zw, err := flate.NewWriter(&buf, flate.BestCompression)
 	if err != nil {
 		return "", err
 	}

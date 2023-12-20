@@ -11,7 +11,7 @@ func TestEncode(t *testing.T) {
 Bob -> Alice : hello
 @enduml`
 
-	expected := "UDfoA2v9B2efpStXSifFKj2rKt3CoKnELR1Io4ZDoSddSaZDIodDpG44003___W93C00"
+	expected := "SYWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKifpSq11000__y0"
 
 	encoded, err := DeflateAndEncode(source)
 
